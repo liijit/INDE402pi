@@ -15,25 +15,56 @@ board.on("ready", function() {
   thermometer.on("data", function() {
     var currentSecond = new Date().getSeconds();
     let pit = new Date();
-    let space = " ";
+    let dash = "-";
     let colon = ":";
 
-    let d = pit.getDate();
-    let m = pit.getMonth()+1);
+    let d = ('0' + pit.getDate()).slice(-2);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    let m = ('0' + (pit.getMonth()+1)).slice(-2);
     let y = pit.getFullYear();
 
     let s = pit.getSeconds();
-    let m = pit.getMinutes();
+    let min = pit.getMinutes();
     let h = pit.getHours();
     
     if((currentSecond % 10) == 0)
     {
       state: 'on',
       axios.post('https://thermo-db.herokuapp.com/fetchData', {
-        Time: h+colon+m+colon+s + " " + d+space+m+space+y;
+        Time: h+colon+min+colon+s,
+        Date: d+dash+m+dash+y,
+        
         Temperature: this.celsius
       })
-      console.log(this.celsius + "°C", this.fahrenheit + "°F", new Date().getSeconds()); 
+      console.log(this.celsius + "°C", this.fahrenheit + "°F", new Date().getSeconds());
+      console.log(h+colon+min+colon+s + " " + d+dash+m+dash+y);
     }
    
   });

@@ -43,7 +43,4 @@ board.on("ready", function() {
       console.log(this.celsius + "°C " + "~ ",this.fahrenheit + "°F " + "@ " +h+ ":" +min+ ":" +s+ " " +d+ "-" +m+ "-" +y);
     }
   });
-  
-
-  
 });

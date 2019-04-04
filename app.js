@@ -17,7 +17,7 @@ board.on("ready", function() {
     let s = ("0" + pit.getSeconds()).slice(-2);
     let min = ("0" + pit.getMinutes()).slice(-2);
     
-    if((min % 30) == 0 && s = 0) {
+    if((min % 30) == 0 && s == 0) {
       let d = ("0" + pit.getDate()).slice(-2);
       let m = ("0" + (pit.getMonth()+1)).slice(-2);
       let y = ("0" + pit.getFullYear()).slice(-2);

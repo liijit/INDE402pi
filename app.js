@@ -17,13 +17,14 @@ board.on("ready", function() {
     let s = ("0" + pit.getSeconds()).slice(-2);
     let min = ("0" + pit.getMinutes()).slice(-2);
     
-    if((min % 1) == 0)
-    {
+    if((min % 30) == 0 && s = 0) {
       let d = ("0" + pit.getDate()).slice(-2);
       let m = ("0" + (pit.getMonth()+1)).slice(-2);
       let y = ("0" + pit.getFullYear()).slice(-2);
       
       let h = ("0" + pit.getHours()).slice(-2);
+      
+      console.log(this.celsius + "°C " + "~ ",this.fahrenheit + "°F " + "@ " +h+ ":" +min+ ":" +s+ " " +d+ "-" +m+ "-" +y);
       
       state: 'on',
       axios.post('https://thermo-db.herokuapp.com/fetchData', {
@@ -40,7 +41,6 @@ board.on("ready", function() {
         console.log("An error occured with Axios");
       })
       
-      console.log(this.celsius + "°C " + "~ ",this.fahrenheit + "°F " + "@ " +h+ ":" +min+ ":" +s+ " " +d+ "-" +m+ "-" +y);
     }
   });
 });

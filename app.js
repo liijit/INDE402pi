@@ -11,32 +11,36 @@ board.on("ready", function() {
   });
 
   thermometer.on("data", function() {
+    /*pit = Point In Time*/
+    var pit = new Date();
     
-    let pit = new Date();
-    let dash = "-";
-    let colon = ":";
-
-    let d = ('0' + pit.getDate()).slice(-2);
-    let m = ('0' + (pit.getMonth()+1)).slice(-2);
-    let y = pit.getFullYear();
-
-    let s = pit.getSeconds();
-    let min = pit.getMinutes();
-    let h = pit.getHours();
+    let s = ("0" + pit.getSeconds()).slice(-2);
+    let min = ("0" + pit.getMinutes()).slice(-2);
     
-    var currentMinute = min;
-    
-    if((currentMinute % 15) == 0 && s == 0)
+    if((min % 1) == 0)
     {
+      let d = ("0" + pit.getDate()).slice(-2);
+      let m = ("0" + (pit.getMonth()+1)).slice(-2);
+      let y = ("0" + pit.getFullYear()).slice(-2);
+      
+      let h = ("0" + pit.getHours()).slice(-2);
+      
       state: 'on',
       axios.post('https://thermo-db.herokuapp.com/fetchData', {
-        Time: h+colon+min+colon+s,
-        Date: d+dash+m+dash+y,
+        Time: h+ ":" + min + ":" +s,
+        Date: d+ "-" +m+ "-" +y,
         
         Temperature: this.celsius
       })
-      console.log(this.celsius + "°C", this.fahrenheit + "°F", new Date().getSeconds());
-      console.log(h+colon+min+colon+s + " " + d+dash+m+dash+y);
+      
+      .then(function (response) {
+        console.log("POST Success!");
+      })
+      .catch(function (error) {
+        console.log("An error occured with Axios");
+      })
+      
+      console.log(this.celsius + "°C " + "~ ",this.fahrenheit + "°F " + "@ " +h+ ":" +min+ ":" +s+ " " +d+ "-" +m+ "-" +y);
     }
   });
   
